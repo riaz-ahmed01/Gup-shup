@@ -7,11 +7,8 @@ const User = ({ userDetails }) => {
   const dispatch = useDispatch();
   const { selectedUser } = useSelector((state) => state.user);
   const { onlineUsers } = useSelector((state) => state.socket);
-  // console.log(onlineUsers," from user component online users");
   
-
-  
-    const isUserOnline = onlineUsers?.includes(userDetails?._id);
+  const isUserOnline = onlineUsers?.includes(userDetails?._id);
 
 
   const handleClick = () => {
@@ -21,7 +18,7 @@ const User = ({ userDetails }) => {
     // user card
     <div onClick={handleClick} className={`flex items-center rounded-lg cursor-pointer hover:bg-gray-700/10   py-1 px-2 ${userDetails?._id === selectedUser?._id && 'bg-gray-700/20'}`}>
 
-      <div className={`avatar relative ${isUserOnline ? 'online' : 'offline'}`}>
+      <div className={`avatar ${isUserOnline && 'online'}`}>
         <div className="w-12 rounded-full">
           <img src={userDetails?.avatar} />
         </div>

@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 const Message = ({ message }) => {
   const messageRef = useRef(null);
   const { userProfile, selectedUser } = useSelector((state) => state.user);
-  // console.log(userProfile?._id === message?.senderId);
+
+  
+
 
   useEffect(() => {
     if (messageRef.current) {
@@ -18,7 +20,7 @@ const Message = ({ message }) => {
     <>  
       <div
         ref={messageRef}
-       className={`chat ${userProfile?._id === message?.senderId ? 'chat-end' : 'chat-start'}`}>
+       className={`chat  ${userProfile?._id === message?.senderId ? 'chat-end' : 'chat-start'}`}>
         <div className="chat-image avatar">
           <div className="w-10 rounded-full">
             <img
@@ -29,7 +31,8 @@ const Message = ({ message }) => {
         </div>
         {/* message */}
         <div className="chat-header">
-          <time className="text-xs opacity-50">12:45</time>
+          <time className="text-xs opacity-50">{message?.createdAt?new Date(message?.createdAt).toLocaleTimeString() : ""
+            }</time>
         </div>
         <div className="chat-bubble">{message?.message}</div>
       </div>

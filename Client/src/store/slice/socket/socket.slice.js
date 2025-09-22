@@ -10,18 +10,24 @@ export const socketSlice = createSlice({
   name: "socket",
   initialState,
   reducers: {
+    // initialize socket
     initializeSocket: (state, action) => {
       const socket = io(import.meta.env.VITE_SOCKET_URL, {
         query: {
           userId: action.payload,
         },
       });
-      // console.log("Socket initialized:", socket);
-
+      // log the socket object to verify connection
       state.socket = socket;
     },
+    // update online users
     setOnlineUsers: (state, action) => {
       state.onlineUsers = action.payload;
+      console.log(action.payload," from socket slice");
+      
+
+      console.log("Online Users Updated:", state.onlineUsers);
+      
     },
   },
 });

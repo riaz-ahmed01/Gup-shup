@@ -11,6 +11,8 @@ const MessageContainer = () => {
   const { selectedUser } = useSelector((state) => state.user);
   const { messages } = useSelector((state) => state.message);
 
+  
+
   useEffect(() => {
     if (selectedUser?._id) {
       dispatch(getMessageThunk({ receiverId: selectedUser?._id }));

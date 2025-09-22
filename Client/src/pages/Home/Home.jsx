@@ -1,6 +1,6 @@
 import React from "react";
 import UserSidebar from "./UserSidebar";
-import MessageContainer from "./messageContainer";
+import MessageContainer from "./MessageContainer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   initializeSocket,
@@ -14,26 +14,30 @@ const Home = () => {
   const { isAuthenticated, userProfile } = useSelector((state) => state.user);
   const { socket, onlineUsers } = useSelector((state) => state.socket);
 
+  // console.log("Socket in Home component:", socket);
+  console.log("Online Users in Home component:", onlineUsers);
 
   useEffect(() => {
     if (isAuthenticated && userProfile?._id) {
       dispatch(setOnlineUsers(userProfile?.onlineUsers || []));
       dispatch(initializeSocket(userProfile._id));
     }
-  }, [isAuthenticated, userProfile?._id]);
+  }, [isAuthenticated, userProfile]);
 
   useEffect(() => {
     if (!socket) return;
     socket.on("onlineUsers", (onlineUsers) => {
       dispatch(setOnlineUsers(onlineUsers));
-      console.log("Online users:", onlineUsers);
     });
 
     socket.on("message", (message) => {
-      console.log("Received message \\\\\\\\:", message);
+      console.log("Received message:==========", message);
       dispatch(setNewMessage(message));
     });
-    return () => socket.close();
+    return () => {
+      socket.off("onlineUsers");
+      socket.off("message");
+    };
   }, [socket]);
 
   return (
