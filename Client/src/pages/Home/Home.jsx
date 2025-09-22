@@ -14,9 +14,6 @@ const Home = () => {
   const { isAuthenticated, userProfile } = useSelector((state) => state.user);
   const { socket, onlineUsers } = useSelector((state) => state.socket);
 
-  // console.log("Socket in Home component:", socket);
-  console.log("Online Users in Home component:", onlineUsers);
-
   useEffect(() => {
     if (isAuthenticated && userProfile?._id) {
       dispatch(setOnlineUsers(userProfile?.onlineUsers || []));
@@ -31,7 +28,6 @@ const Home = () => {
     });
 
     socket.on("message", (message) => {
-      console.log("Received message:==========", message);
       dispatch(setNewMessage(message));
     });
     return () => {

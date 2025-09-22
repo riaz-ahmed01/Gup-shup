@@ -23,11 +23,6 @@ export const socketSlice = createSlice({
     // update online users
     setOnlineUsers: (state, action) => {
       state.onlineUsers = action.payload;
-      console.log(action.payload," from socket slice");
-      
-
-      console.log("Online Users Updated:", state.onlineUsers);
-      
     },
   },
 });

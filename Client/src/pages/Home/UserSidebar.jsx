@@ -73,7 +73,6 @@ const UserSidebar = () => {
       {/* user list */}
       <div className="h-full overflow-y-auto flex-col gap-3">
         {users?.map((userDetails) => {
-          // console.log(userDetails);
           return <User key={userDetails._id} userDetails={userDetails} />;
         })}
       </div>

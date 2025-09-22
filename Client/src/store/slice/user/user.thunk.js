@@ -15,7 +15,6 @@ export const loginUserThunk = createAsyncThunk(
     } catch (error) {
       console.error(error);
       const errorOutput = error?.response?.data?.errMessage;
-      toast.error(errorOutput);
       return rejectWithValue(errorOutput);
     }
   }
